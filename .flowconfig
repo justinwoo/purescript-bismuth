@@ -1,0 +1,12 @@
+[ignore]
+
+[include]
+./test/
+
+[libs]
+
+[lints]
+
+[options]
+
+[strict]

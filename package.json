@@ -1,0 +1,19 @@
+{
+  "name": "gis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "pulp test && killall flow; flow",
+    "format": "prettier test/**/*.js --write"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "flow-bin": "^0.60.1",
+    "prettier": "^1.8.2"
+  }
+}
