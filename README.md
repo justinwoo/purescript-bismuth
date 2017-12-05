@@ -46,3 +46,7 @@ export type VariantTest =
   | { type: "b", value: number }
   | { type: "c", value: boolean };
 ```
+
+## Example
+
+See and CONTRIBUTE to the [example here](https://github.com/justinwoo/bismuth-example)
