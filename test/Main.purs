@@ -3,6 +3,7 @@ module Test.Main where
 import Prelude
 
 import Bismuth (generateFlowType)
+import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Class (liftEff)
 import Data.Foldable (intercalate)
 import Data.Foreign (Foreign)
@@ -27,8 +28,9 @@ type A =
   , g :: Number -> Number -> Number
   , h :: Fn2 Number Number Number
   , i :: Fn2 Number (Fn2 Number Number Number) Number
-  , l :: Foreign
   , k :: StrMap Number
+  , l :: Foreign
+  , m :: Eff () String
   }
 
 type VariantTest = Variant

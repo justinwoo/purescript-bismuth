@@ -9,7 +9,8 @@ export type A = {
   h: (a: number, b: number) => number,
   i: (a: number, b: (a: number, b: number) => number) => number,
   k: { [key: string]: number },
-  l: any
+  l: any,
+  m: () => string
 };
 export type VariantTest =
   | { type: "a", value: string }

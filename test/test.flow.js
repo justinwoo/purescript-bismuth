@@ -12,8 +12,9 @@ const a1: Gen.A = {
   g: a => b => a + b,
   h: (a, b) => a,
   i: (a, b) => a,
+  k: { a: 1212 },
   l: "literally anything",
-  k: { a: 1212 }
+  m: () => "asdf"
 };
 
 const a2: Gen.A = {
@@ -27,8 +28,9 @@ const a2: Gen.A = {
   g: a => b => a - b,
   h: (a, b) => a,
   i: (a, b) => a,
+  k: { j: 1, m: 2 },
   l: false,
-  k: { j: 1, m: 2 }
+  m: () => "asdf"
 };
 
 const fakeUnion1: Gen.VariantTest = {

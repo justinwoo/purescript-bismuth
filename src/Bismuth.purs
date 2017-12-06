@@ -1,6 +1,7 @@
 module Bismuth where
 
 -- | Identity function to apply the HasFlowRep constraint
+import Control.Monad.Eff (Eff)
 import Data.Foreign (Foreign)
 import Data.Function (id)
 import Data.Function.Uncurried (Fn2)
@@ -28,6 +29,14 @@ generateFlowType name _ =
   "export type " <> name <> "=" <> ty
   where
     ty = toFlowRep (Proxy :: Proxy a)
+
+-- | A convenience function for generating types taking a concrete value over a proxy.
+generateFlowType' :: forall a
+   . HasFlowRep a
+  => String
+  -> a
+  -> String
+generateFlowType' s a = generateFlowType s (Proxy :: Proxy a)
 
 class HasFlowRep a where
   toFlowRep :: Proxy a -> String
@@ -64,6 +73,13 @@ instance arrayHasFlowRep ::
   toFlowRep _ = toFlowRep p <> "[]"
     where
       p = Proxy :: Proxy a
+
+instance effHasFlowRep ::
+  ( HasFlowRep a
+  ) => HasFlowRep (Eff e a) where
+  toFlowRep _ = "() => " <> a
+    where
+      a = toFlowRep (Proxy :: Proxy a)
 
 instance functionHasFlowRep ::
   ( HasFlowRep a
