@@ -39,6 +39,13 @@ generateFlowType' :: forall a
   -> String
 generateFlowType' s a = generateFlowType s (Proxy :: Proxy a)
 
+-- | A convenience function for getting the flow rep of a concrete value
+toFlowRep' :: forall a
+  . HasFlowRep a
+ => a
+ -> String
+toFlowRep' _ = toFlowRep (Proxy :: Proxy a)
+
 class HasFlowRep a where
   toFlowRep :: Proxy a -> String
 
