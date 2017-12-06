@@ -12,6 +12,7 @@ import Data.Semigroup ((<>))
 import Data.StrMap (StrMap)
 import Data.Symbol (class IsSymbol, SProxy(..), reflectSymbol)
 import Data.Variant (Variant)
+import Prelude (Unit)
 import Type.Proxy (Proxy(..))
 import Type.Row (class RowToList, Cons, Nil, RLProxy(..), kind RowList)
 
@@ -51,6 +52,9 @@ instance booleanHasFlowRep :: HasFlowRep Boolean where
   toFlowRep _ = "boolean"
 
 instance foreignHasFlowRep :: HasFlowRep Foreign where
+  toFlowRep _ = "any"
+
+instance unitHasFlowRep :: HasFlowRep Unit where
   toFlowRep _ = "any"
 
 instance strmapHasFlowRep ::
