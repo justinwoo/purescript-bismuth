@@ -3,7 +3,7 @@ module Bismuth.LibDef where
 import Prelude
 
 import Bismuth (class HasFlowRep, toFlowRep)
-import Data.Foldable (intercalate)
+import Data.Foldable (foldMap, intercalate)
 import Data.StrMap (StrMap, toArrayWithKey)
 import Type.Proxy (Proxy(..))
 
@@ -18,8 +18,8 @@ type Exports = StrMap String
 createModuleDefinition :: String -> Declarations -> Exports -> String
 createModuleDefinition s declarations exports =
   "declare module '" <> s <> "' {\n"
+  <> foldMap (flip (<>) ";\n") declarations <> "\n"
   <> "declare module.exports: {\n"
-  <> intercalate ";\n" declarations <> "\n"
   <> intercalate ",\n" (toArrayWithKey renderItem exports)
   <> "\n}\n}"
   where
