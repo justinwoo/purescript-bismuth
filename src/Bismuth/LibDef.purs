@@ -26,9 +26,9 @@ createModuleDefinition s declarations exports =
     renderItem k v = k <> ": " <> v
 
 -- | A convenience function for declaring a flow type in a lib definiton
-declareFlowType :: forall a
+declareFlowType :: forall proxy a
    . HasFlowRep a
-  => String -> Proxy a -> String
+  => String -> proxy a -> String
 declareFlowType name _ =
   "declare type " <> name <> "=" <> ty
   where

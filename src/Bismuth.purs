@@ -23,9 +23,9 @@ toFlow :: forall a
 toFlow = id
 
 -- | Generate a Flow type signature for a given type. Takes the name to be used as an arg.
-generateFlowType :: forall a
+generateFlowType :: forall proxy a
    . HasFlowRep a
-  => String -> Proxy a -> String
+  => String -> proxy a -> String
 generateFlowType name _ =
   "export type " <> name <> "=" <> ty
   where

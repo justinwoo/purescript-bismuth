@@ -8,9 +8,11 @@ import Control.Monad.Eff.Class (liftEff)
 import Data.Foldable (intercalate)
 import Data.Foreign (Foreign)
 import Data.Function.Uncurried (Fn2)
+import Data.Identity (Identity(..))
 import Data.Nullable (Nullable)
 import Data.StrMap (StrMap)
-import Data.Variant (Variant)
+import Data.Symbol (SProxy(..))
+import Data.Variant (Variant, inj)
 import Node.Encoding (Encoding(..))
 import Node.FS.Sync (writeTextFile)
 import Test.Spec (describe, it)
@@ -39,6 +41,9 @@ type VariantTest = Variant
   , c :: Boolean
   )
 
+variantTestValue :: VariantTest
+variantTestValue = inj (SProxy :: SProxy "a") "string"
+
 main :: _
 main = run [consoleReporter] do
   describe "purescript-bismuth" do
@@ -50,6 +55,6 @@ generateFlowFile :: _
 generateFlowFile = writeTextFile UTF8 "./test/generated.flow.js" values
   where
     values = format defaultOptions $ "//@flow\n" <> intercalate "\n"
-      [ generateFlowType "A" (Proxy :: Proxy A)
+      [ generateFlowType "A" (Identity variantTestValue) -- you can use Identity for values with a generic "proxy"
       , generateFlowType "VariantTest" (Proxy :: Proxy VariantTest)
       ]
